@@ -1,7 +1,7 @@
 import { motion } from "framer-motion";
 import type { MenuCategory } from "@/data/menuData";
 
-const brandEase = [0.19, 1, 0.22, 1] as const;
+const brandEase: [number, number, number, number] = [0.19, 1, 0.22, 1];
 
 interface MenuSectionProps {
   category: MenuCategory;
