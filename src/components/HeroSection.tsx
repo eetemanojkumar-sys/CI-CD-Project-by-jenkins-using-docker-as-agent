@@ -1,6 +1,6 @@
 import { motion } from "framer-motion";
 
-const brandEase = [0.19, 1, 0.22, 1] as const;
+const brandEase: [number, number, number, number] = [0.19, 1, 0.22, 1];
 
 const HeroSection = () => {
   return (
