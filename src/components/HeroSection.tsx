@@ -29,7 +29,7 @@ const HeroSection = () => {
       <motion.div
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
-        transition={{ duration: 1.2, delay: 0.5, ease: brandEase as unknown as number[] }}
+        transition={{ duration: 1.2, delay: 0.5, ease: brandEase }}
         className="absolute top-8 right-6 md:right-16"
       >
         <a

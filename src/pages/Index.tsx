@@ -17,7 +17,7 @@ const Index = () => {
         initial={{ opacity: 0 }}
         whileInView={{ opacity: 1 }}
         viewport={{ once: true }}
-        transition={{ duration: 0.8, ease: brandEase as unknown as number[] }}
+        transition={{ duration: 0.8, ease: brandEase }}
         className="px-6 md:px-16 py-[10vh]"
       >
         <h2
