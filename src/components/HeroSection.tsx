@@ -8,7 +8,7 @@ const HeroSection = () => {
       <motion.div
         initial={{ opacity: 0, y: 40 }}
         animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 1.2, ease: brandEase as unknown as number[] }}
+        transition={{ duration: 1.2, ease: brandEase }}
       >
         <h1
           className="font-serif italic font-light text-foreground leading-[0.95]"
