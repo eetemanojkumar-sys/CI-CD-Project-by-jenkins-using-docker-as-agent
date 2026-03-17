@@ -5,7 +5,7 @@ import MenuNav from "@/components/MenuNav";
 import BookingBar from "@/components/BookingBar";
 import { menuCategories } from "@/data/menuData";
 
-const brandEase = [0.19, 1, 0.22, 1] as const;
+const brandEase: [number, number, number, number] = [0.19, 1, 0.22, 1];
 
 const Index = () => {
   return (
