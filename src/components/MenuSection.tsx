@@ -15,7 +15,7 @@ const MenuSection = ({ category, index }: MenuSectionProps) => {
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, margin: "-50px" }}
       transition={{ duration: 0.8, ease: brandEase, delay: 0.05 }}
-      className="border-t border-border py-8 grid grid-cols-1 md:grid-cols-12 gap-4"
+      className="border-t border-royal-red/30 py-8 grid grid-cols-1 md:grid-cols-12 gap-4"
     >
       <span className="md:col-span-4 font-mono text-xs uppercase tracking-widest text-muted-foreground mb-4 md:mb-0 md:pt-1">
         {category.label}
