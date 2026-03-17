@@ -2,7 +2,7 @@ import { menuCategories } from "@/data/menuData";
 
 const MenuNav = () => {
   return (
-    <nav className="px-6 md:px-16 py-8 border-t border-border overflow-x-auto">
+    <nav className="px-6 md:px-16 py-8 border-t border-royal-red/30 overflow-x-auto">
       <div className="flex gap-6 min-w-max">
         {menuCategories.map((cat, i) => (
           <a
