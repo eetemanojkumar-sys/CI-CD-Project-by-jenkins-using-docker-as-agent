@@ -8,7 +8,7 @@ const MenuNav = () => {
           <a
             key={i}
             href={`#section-${i}`}
-            className="font-mono text-xs uppercase tracking-widest text-muted-foreground hover:text-foreground transition-colors duration-500 whitespace-nowrap"
+            className="font-mono text-xs uppercase tracking-widest text-muted-foreground hover:text-accent transition-colors duration-500 whitespace-nowrap"
           >
             {cat.label}
           </a>

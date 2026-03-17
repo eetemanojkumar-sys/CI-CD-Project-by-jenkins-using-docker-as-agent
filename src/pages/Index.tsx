@@ -37,7 +37,7 @@ const Index = () => {
       </motion.section>
 
       {/* Footer */}
-      <footer className="border-t border-border px-6 md:px-16 py-16">
+      <footer className="border-t border-royal-red/30 px-6 md:px-16 py-16">
         <div className="grid grid-cols-1 md:grid-cols-12 gap-8">
           <div className="md:col-span-4">
             <h3 className="font-serif italic text-2xl font-light text-foreground">Brundavanam</h3>
