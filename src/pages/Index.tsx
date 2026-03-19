@@ -41,6 +41,8 @@ const Index = () => {
         </div>
       </motion.section>
 
+      <QRCodeSection />
+
       {/* Footer */}
       <motion.footer
         initial={{ opacity: 0, y: 40 }}
