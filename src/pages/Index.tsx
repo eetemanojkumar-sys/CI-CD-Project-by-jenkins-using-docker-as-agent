@@ -3,6 +3,7 @@ import HeroSection from "@/components/HeroSection";
 import MenuSection from "@/components/MenuSection";
 import MenuNav from "@/components/MenuNav";
 import BookingBar from "@/components/BookingBar";
+import QRCodeSection from "@/components/QRCodeSection";
 import { menuCategories } from "@/data/menuData";
 
 const brandEase: [number, number, number, number] = [0.19, 1, 0.22, 1];
