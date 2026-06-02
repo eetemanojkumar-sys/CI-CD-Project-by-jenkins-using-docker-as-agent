@@ -257,6 +257,29 @@ const BookingBar = () => {
                           placeholder="Pickup / delivery address"
                           className="bg-background border border-royal-red/30 rounded-lg px-3 py-2.5 font-mono text-sm text-foreground focus:outline-none focus:border-accent transition-colors resize-none"
                         />
+                        <button
+                          type="button"
+                          onClick={handleShareLocation}
+                          disabled={locating}
+                          className="mt-1 flex items-center justify-center gap-2 py-2 rounded-lg border border-accent/50 text-accent font-mono text-xs uppercase tracking-widest hover:bg-accent/10 transition-colors disabled:opacity-60"
+                        >
+                          {locating ? (
+                            <Loader2 className="w-3.5 h-3.5 animate-spin" />
+                          ) : (
+                            <MapPin className="w-3.5 h-3.5" />
+                          )}
+                          {gpsLink ? "Update GPS Location" : "Share GPS Location"}
+                        </button>
+                        {gpsLink && (
+                          <a
+                            href={gpsLink}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="font-mono text-[10px] text-muted-foreground truncate hover:text-accent transition-colors"
+                          >
+                            {gpsLink}
+                          </a>
+                        )}
                       </div>
                     )}
 
