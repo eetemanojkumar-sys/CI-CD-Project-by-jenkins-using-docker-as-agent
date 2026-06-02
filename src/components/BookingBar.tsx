@@ -46,10 +46,34 @@ const BookingBar = () => {
   const [orderType, setOrderType] = useState<OrderType>("dine-in");
   const [tableOrNotes, setTableOrNotes] = useState("");
   const [address, setAddress] = useState("");
+  const [gpsLink, setGpsLink] = useState("");
+  const [locating, setLocating] = useState(false);
 
   const closeDrawer = () => {
     setShowCart(false);
     setStage("cart");
+  };
+
+  const handleShareLocation = () => {
+    if (!("geolocation" in navigator)) {
+      toast.error("Geolocation is not supported on this device");
+      return;
+    }
+    setLocating(true);
+    navigator.geolocation.getCurrentPosition(
+      (pos) => {
+        const { latitude, longitude } = pos.coords;
+        const link = `https://maps.google.com/?q=${latitude.toFixed(6)},${longitude.toFixed(6)}`;
+        setGpsLink(link);
+        setLocating(false);
+        toast.success("Location captured");
+      },
+      (err) => {
+        setLocating(false);
+        toast.error(err.code === err.PERMISSION_DENIED ? "Location permission denied" : "Couldn't get your location");
+      },
+      { enableHighAccuracy: true, timeout: 10000 },
+    );
   };
 
   const handleConfirm = () => {
@@ -63,6 +87,7 @@ const BookingBar = () => {
       orderType: result.data.orderType,
       tableOrNotes: result.data.tableOrNotes,
       address: result.data.address,
+      gpsLink: orderType === "takeaway" ? gpsLink : undefined,
     });
     toast.success("Opening WhatsApp with your order…");
     closeDrawer();
