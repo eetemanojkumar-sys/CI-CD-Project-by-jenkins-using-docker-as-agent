@@ -13,6 +13,7 @@ export interface CustomerDetails {
   orderType: OrderType;
   tableOrNotes: string;
   address?: string;
+  gpsLink?: string;
 }
 
 interface CartContextType {
