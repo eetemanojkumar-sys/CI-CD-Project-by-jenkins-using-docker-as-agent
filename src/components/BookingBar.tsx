@@ -219,6 +219,22 @@ const BookingBar = () => {
                       </div>
                     </div>
 
+                    {orderType === "takeaway" && (
+                      <div className="flex flex-col gap-1.5">
+                        <label className="font-mono text-xs uppercase tracking-widest text-muted-foreground">
+                          Address
+                        </label>
+                        <textarea
+                          value={address}
+                          onChange={(e) => setAddress(e.target.value)}
+                          maxLength={200}
+                          rows={2}
+                          placeholder="Pickup / delivery address"
+                          className="bg-background border border-royal-red/30 rounded-lg px-3 py-2.5 font-mono text-sm text-foreground focus:outline-none focus:border-accent transition-colors resize-none"
+                        />
+                      </div>
+                    )}
+
                     <div className="flex flex-col gap-1.5">
                       <label className="font-mono text-xs uppercase tracking-widest text-muted-foreground">
                         {orderType === "dine-in" ? "Table No. (optional)" : "Notes (optional)"}
