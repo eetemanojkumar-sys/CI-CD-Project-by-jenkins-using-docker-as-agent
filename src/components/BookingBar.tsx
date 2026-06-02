@@ -48,7 +48,11 @@ const BookingBar = () => {
       toast.error(result.error.issues[0].message);
       return;
     }
-    sendToWhatsApp(result.data);
+    sendToWhatsApp({
+      name: result.data.name ?? "",
+      orderType: result.data.orderType ?? "dine-in",
+      tableOrNotes: result.data.tableOrNotes ?? "",
+    });
     toast.success("Opening WhatsApp with your order…");
     closeDrawer();
   };
