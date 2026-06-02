@@ -12,6 +12,7 @@ export interface CustomerDetails {
   name: string;
   orderType: OrderType;
   tableOrNotes: string;
+  address?: string;
 }
 
 interface CartContextType {
