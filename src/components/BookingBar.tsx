@@ -7,18 +7,27 @@ import { toast } from "sonner";
 
 const brandEase: [number, number, number, number] = [0.19, 1, 0.22, 1];
 
-const checkoutSchema = z.object({
-  name: z
-    .string()
-    .trim()
-    .nonempty({ message: "Please enter your name" })
-    .max(60, { message: "Name must be under 60 characters" }),
-  orderType: z.enum(["dine-in", "takeaway"]),
-  tableOrNotes: z
-    .string()
-    .trim()
-    .max(120, { message: "Keep notes under 120 characters" }),
-});
+const checkoutSchema = z
+  .object({
+    name: z
+      .string()
+      .trim()
+      .nonempty({ message: "Please enter your name" })
+      .max(60, { message: "Name must be under 60 characters" }),
+    orderType: z.enum(["dine-in", "takeaway"]),
+    tableOrNotes: z
+      .string()
+      .trim()
+      .max(120, { message: "Keep notes under 120 characters" }),
+    address: z
+      .string()
+      .trim()
+      .max(200, { message: "Keep address under 200 characters" }),
+  })
+  .refine(
+    (d) => d.orderType !== "takeaway" || d.address.length > 0,
+    { path: ["address"], message: "Please enter a pickup/delivery address" },
+  );
 
 const BookingBar = () => {
   const {
