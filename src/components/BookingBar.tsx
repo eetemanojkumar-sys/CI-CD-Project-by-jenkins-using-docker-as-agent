@@ -1,5 +1,5 @@
 import { motion, AnimatePresence } from "framer-motion";
-import { MessageCircle, Phone, ShoppingBag, X, Plus, Minus, ArrowLeft } from "lucide-react";
+import { MessageCircle, Phone, ShoppingBag, X, Plus, Minus, ArrowLeft, MapPin, Loader2 } from "lucide-react";
 import { useCart, type OrderType } from "@/context/CartContext";
 import { useState } from "react";
 import { z } from "zod";
