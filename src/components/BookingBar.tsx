@@ -1,5 +1,5 @@
 import { motion, AnimatePresence } from "framer-motion";
-import { MessageCircle, Phone, ShoppingBag, X, Plus, Minus, ArrowLeft } from "lucide-react";
+import { MessageCircle, Phone, ShoppingBag, X, Plus, Minus, ArrowLeft, MapPin, Loader2 } from "lucide-react";
 import { useCart, type OrderType } from "@/context/CartContext";
 import { useState } from "react";
 import { z } from "zod";
@@ -46,10 +46,34 @@ const BookingBar = () => {
   const [orderType, setOrderType] = useState<OrderType>("dine-in");
   const [tableOrNotes, setTableOrNotes] = useState("");
   const [address, setAddress] = useState("");
+  const [gpsLink, setGpsLink] = useState("");
+  const [locating, setLocating] = useState(false);
 
   const closeDrawer = () => {
     setShowCart(false);
     setStage("cart");
+  };
+
+  const handleShareLocation = () => {
+    if (!("geolocation" in navigator)) {
+      toast.error("Geolocation is not supported on this device");
+      return;
+    }
+    setLocating(true);
+    navigator.geolocation.getCurrentPosition(
+      (pos) => {
+        const { latitude, longitude } = pos.coords;
+        const link = `https://maps.google.com/?q=${latitude.toFixed(6)},${longitude.toFixed(6)}`;
+        setGpsLink(link);
+        setLocating(false);
+        toast.success("Location captured");
+      },
+      (err) => {
+        setLocating(false);
+        toast.error(err.code === err.PERMISSION_DENIED ? "Location permission denied" : "Couldn't get your location");
+      },
+      { enableHighAccuracy: true, timeout: 10000 },
+    );
   };
 
   const handleConfirm = () => {
@@ -63,6 +87,7 @@ const BookingBar = () => {
       orderType: result.data.orderType,
       tableOrNotes: result.data.tableOrNotes,
       address: result.data.address,
+      gpsLink: orderType === "takeaway" ? gpsLink : undefined,
     });
     toast.success("Opening WhatsApp with your order…");
     closeDrawer();
@@ -232,6 +257,29 @@ const BookingBar = () => {
                           placeholder="Pickup / delivery address"
                           className="bg-background border border-royal-red/30 rounded-lg px-3 py-2.5 font-mono text-sm text-foreground focus:outline-none focus:border-accent transition-colors resize-none"
                         />
+                        <button
+                          type="button"
+                          onClick={handleShareLocation}
+                          disabled={locating}
+                          className="mt-1 flex items-center justify-center gap-2 py-2 rounded-lg border border-accent/50 text-accent font-mono text-xs uppercase tracking-widest hover:bg-accent/10 transition-colors disabled:opacity-60"
+                        >
+                          {locating ? (
+                            <Loader2 className="w-3.5 h-3.5 animate-spin" />
+                          ) : (
+                            <MapPin className="w-3.5 h-3.5" />
+                          )}
+                          {gpsLink ? "Update GPS Location" : "Share GPS Location"}
+                        </button>
+                        {gpsLink && (
+                          <a
+                            href={gpsLink}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="font-mono text-[10px] text-muted-foreground truncate hover:text-accent transition-colors"
+                          >
+                            {gpsLink}
+                          </a>
+                        )}
                       </div>
                     )}
 

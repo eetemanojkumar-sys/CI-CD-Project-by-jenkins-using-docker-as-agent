@@ -13,6 +13,7 @@ export interface CustomerDetails {
   orderType: OrderType;
   tableOrNotes: string;
   address?: string;
+  gpsLink?: string;
 }
 
 interface CartContextType {
@@ -72,11 +73,16 @@ export const CartProvider = ({ children }: { children: ReactNode }) => {
       details.orderType === "takeaway" && details.address?.trim()
         ? `Address: ${details.address.trim()}\n`
         : "";
+    const gpsLine =
+      details.orderType === "takeaway" && details.gpsLink?.trim()
+        ? `GPS: ${details.gpsLink.trim()}\n`
+        : "";
     const message =
       `Hi Brundavanam! New order:\n\n` +
       `Name: ${details.name.trim()}\n` +
       `Type: ${typeLabel}\n` +
       `${addressLine}` +
+      `${gpsLine}` +
       `${extraLine}\n` +
       `${orderLines}\n\n` +
       `Total: ₹${totalPrice}`;
