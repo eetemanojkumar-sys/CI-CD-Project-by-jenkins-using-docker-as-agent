@@ -45,6 +45,7 @@ const BookingBar = () => {
   const [name, setName] = useState("");
   const [orderType, setOrderType] = useState<OrderType>("dine-in");
   const [tableOrNotes, setTableOrNotes] = useState("");
+  const [address, setAddress] = useState("");
 
   const closeDrawer = () => {
     setShowCart(false);
@@ -52,15 +53,16 @@ const BookingBar = () => {
   };
 
   const handleConfirm = () => {
-    const result = checkoutSchema.safeParse({ name, orderType, tableOrNotes });
+    const result = checkoutSchema.safeParse({ name, orderType, tableOrNotes, address });
     if (!result.success) {
       toast.error(result.error.issues[0].message);
       return;
     }
     sendToWhatsApp({
-      name: result.data.name ?? "",
-      orderType: result.data.orderType ?? "dine-in",
-      tableOrNotes: result.data.tableOrNotes ?? "",
+      name: result.data.name,
+      orderType: result.data.orderType,
+      tableOrNotes: result.data.tableOrNotes,
+      address: result.data.address,
     });
     toast.success("Opening WhatsApp with your order…");
     closeDrawer();
