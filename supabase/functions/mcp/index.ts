@@ -7,7 +7,250 @@ import { defineMcp } from "npm:@lovable.dev/mcp-js@0.24.0";
 
 // src/lib/mcp/tools/list-categories.ts
 import { defineTool } from "npm:@lovable.dev/mcp-js@0.24.0";
-import { menuCategories } from "npm:@/data/menuData";
+
+// src/data/menuData.ts
+var menuCategories = [
+  {
+    label: "Veg Soup",
+    items: [
+      { name: "Brundavanam Veg Soup", price: 120 },
+      { name: "Tomato Soup", price: 120 },
+      { name: "Veg Corn Soup", price: 110 },
+      { name: "Veg Sweet Corn Soup", price: 110 },
+      { name: "Veg Hot & Sour Soup", price: 110 },
+      { name: "Veg Manchurian Soup", price: 120 },
+      { name: "Mushroom Soup", price: 120 },
+      { name: "Baby Corn Soup", price: 120 },
+      { name: "Lemon Coriander Soup", price: 120 }
+    ]
+  },
+  {
+    label: "Non-Veg Soup",
+    items: [
+      { name: "Brundavanam Non Veg Soup", price: 170 },
+      { name: "Chicken Hot & Sour Soup", price: 170 },
+      { name: "Chicken Manchurian Soup", price: 140 },
+      { name: "Chicken Sweet Corn Soup", price: 130 },
+      { name: "Chicken Clear Soup", price: 120 },
+      { name: "Chicken Lemon Coriander Soup", price: 140 },
+      { name: "Mutton Bone Soup", price: 170 },
+      { name: "Mutton Hot & Sour Soup", price: 170 }
+    ]
+  },
+  {
+    label: "Veg Starters",
+    items: [
+      { name: "Brundavanam Veg Special", price: 200 },
+      { name: "Gobi Manchurian", price: 190 },
+      { name: "Baby Corn Pepper Dry", price: 180 },
+      { name: "Veg Manchurian", price: 190 },
+      { name: "Gobi 65", price: 190 },
+      { name: "Mushroom Manchurian", price: 190 },
+      { name: "Mushroom 65", price: 200 },
+      { name: "Mushroom Salt & Pepper", price: 200 },
+      { name: "Baby Corn Chilli", price: 210 },
+      { name: "Paneer Chilli", price: 210 },
+      { name: "Paneer 65", price: 210 },
+      { name: "Paneer Salt & Pepper", price: 210 },
+      { name: "Kaju Dry", price: 230 },
+      { name: "Crispy Veg", price: 270 },
+      { name: "Mushroom Pepper Dry", price: 270 },
+      { name: "Baby Corn Pepper Dry", price: 190 }
+    ]
+  },
+  {
+    label: "Chicken Starters",
+    items: [
+      { name: "Brundavanam Special", price: 270 },
+      { name: "Chicken Majestic", price: 240 },
+      { name: "Tava Chicken Special", price: 220 },
+      { name: "Chicken 555", price: 240 },
+      { name: "Chilli Chicken", price: 240 },
+      { name: "Chicken 65", price: 220 },
+      { name: "Chicken Manchurian", price: 220 },
+      { name: "Simla Chicken", price: 220 },
+      { name: "Chicken Lollypop (6 Pcs)", price: 250 },
+      { name: "Dragon Chicken", price: 250 },
+      { name: "Chicken Roast", price: 240 },
+      { name: "Schezwan Chicken", price: 250 },
+      { name: "Sizzler Chicken", price: 260 },
+      { name: "Lemon Chicken", price: 240 },
+      { name: "Pepper Chicken", price: 260 },
+      { name: "Apollo Chicken", price: 240 },
+      { name: "Red Hot Chicken", price: 250 }
+    ]
+  },
+  {
+    label: "Mutton Starters",
+    items: [
+      { name: "Mutton Chilli", price: 350 },
+      { name: "Mutton Manchurian", price: 350 },
+      { name: "Mutton 65", price: 350 },
+      { name: "Mutton Ghee Roast", price: 400 },
+      { name: "Mutton Roast", price: 400 },
+      { name: "Mutton Pepper", price: 500 }
+    ]
+  },
+  {
+    label: "Fish & Prawns",
+    items: [
+      { name: "Apollo Fish", price: 270 },
+      { name: "Fish 65", price: 290 },
+      { name: "Crispy Fish", price: 270 },
+      { name: "Schezwan Fish", price: 280 },
+      { name: "Prawns Manchurian", price: 290 },
+      { name: "Prawns 65", price: 290 },
+      { name: "Loose Prawns", price: 290 },
+      { name: "Spicy Fry Prawns", price: 280 }
+    ]
+  },
+  {
+    label: "Tandoori & Kabab",
+    items: [
+      { name: "Tandoori Chicken Full", price: 500 },
+      { name: "Tandoori Chicken Half", price: 250 },
+      { name: "Tangidi Kabab (4 Pcs)", price: 380 },
+      { name: "Tangidi Kabab (2 Pcs)", price: 190 },
+      { name: "Kalmi Kabab Full (4 Pcs)", price: 380 },
+      { name: "Kalmi Kabab (2 Pcs)", price: 190 },
+      { name: "Chicken Tikka", price: 280 },
+      { name: "Murg Malai Kabab", price: 290 },
+      { name: "Chicken Hariyali Kabab", price: 280 },
+      { name: "Brundavanam Special Kabab", price: 300 },
+      { name: "Paneer Tikka", price: 290 },
+      { name: "Paneer Hariyali Kabab", price: 270 }
+    ]
+  },
+  {
+    label: "Veg Curry",
+    items: [
+      { name: "Brundavanam Special", price: 200 },
+      { name: "Dal Fry", price: 130 },
+      { name: "Dal Tadka", price: 150 },
+      { name: "Mix Veg Curry", price: 190 },
+      { name: "Mushroom Curry", price: 190 },
+      { name: "Kadai Veg", price: 200 },
+      { name: "Paneer Butter Masala", price: 220 },
+      { name: "Paneer Shahi Kurma", price: 220 },
+      { name: "Kaju Curry", price: 220 },
+      { name: "Kaju Butter Masala", price: 220 },
+      { name: "Palak Paneer", price: 210 },
+      { name: "Kadai Paneer", price: 220 },
+      { name: "Paneer Tikka Masala", price: 220 }
+    ]
+  },
+  {
+    label: "Chicken Curry",
+    items: [
+      { name: "Brundavanam Chicken Curry", price: 240 },
+      { name: "Mogalai Chicken Curry", price: 230 },
+      { name: "Chicken Curry Bone", price: 230 },
+      { name: "Chicken Curry Boneless", price: 240 },
+      { name: "Chicken Fry", price: 220 },
+      { name: "Hyderabad Chicken Curry", price: 250 },
+      { name: "Punjabi Chicken Curry", price: 250 },
+      { name: "Butter Chicken Curry", price: 250 },
+      { name: "Andhra Chicken Curry", price: 240 },
+      { name: "Kadai Chicken Curry", price: 240 },
+      { name: "Chicken Tikka Masala", price: 250 },
+      { name: "Afghani Chicken Curry", price: 270 }
+    ]
+  },
+  {
+    label: "Mutton Curry",
+    items: [
+      { name: "Special Mutton", price: 370 },
+      { name: "Gongura Mutton", price: 350 },
+      { name: "Mutton Do Pyaza", price: 350 },
+      { name: "Mutton Mogalai", price: 350 },
+      { name: "Kadai Mutton", price: 350 },
+      { name: "Andhra Mutton", price: 350 },
+      { name: "Mutton Rogan Josh", price: 350 },
+      { name: "Dum Ka Mutton Curry", price: 350 },
+      { name: "Mutton Keema Curry", price: 350 },
+      { name: "Hyderabad Mutton", price: 350 }
+    ]
+  },
+  {
+    label: "Biryani",
+    items: [
+      { name: "Brundavanam Spl Biryani", price: 250 },
+      { name: "Spl Boneless Biryani", price: 250 },
+      { name: "Hyderabad Dum Biryani", price: 200 },
+      { name: "Gongura Chicken Biryani", price: 240 },
+      { name: "Tandoori Chicken Biryani", price: 270 },
+      { name: "Lollypop Chicken Biryani (4 Pcs)", price: 270 },
+      { name: "Fry Chicken Biryani", price: 240 },
+      { name: "Mutton Dum Biryani", price: 320 },
+      { name: "Mutton Spl Biryani", price: 370 },
+      { name: "Egg Biryani", price: 180 },
+      { name: "Fish Biryani", price: 250 },
+      { name: "Prawns Biryani", price: 260 },
+      { name: "Veg Biryani", price: 180 },
+      { name: "Paneer Biryani", price: 220 },
+      { name: "Mushroom Biryani", price: 190 }
+    ]
+  },
+  {
+    label: "Indian Breads",
+    items: [
+      { name: "Tandoori Roti", price: 20 },
+      { name: "Butter Roti", price: 25 },
+      { name: "Plain Naan", price: 40 },
+      { name: "Butter Naan", price: 40 },
+      { name: "Garlic Naan", price: 50 },
+      { name: "Masala Kulcha", price: 60 },
+      { name: "Paneer Kulcha", price: 60 },
+      { name: "Tandoori Parota", price: 60 },
+      { name: "Lacha Parota", price: 60 }
+    ]
+  },
+  {
+    label: "Fried Rice & Noodles",
+    items: [
+      { name: "Brundavanam Spl Fried Rice", price: 200 },
+      { name: "Egg Fried Rice", price: 170 },
+      { name: "Chicken Schezwan Fried Rice", price: 180 },
+      { name: "Chicken Fried Rice", price: 180 },
+      { name: "Mutton Fried Rice", price: 250 },
+      { name: "Veg Fried Rice", price: 140 },
+      { name: "Paneer Fried Rice", price: 170 },
+      { name: "Mushroom Fried Rice", price: 160 },
+      { name: "Chicken Noodles", price: 170 },
+      { name: "Chicken Schezwan Noodles", price: 170 },
+      { name: "Egg Noodles", price: 150 },
+      { name: "Veg Schezwan Noodles", price: 140 }
+    ]
+  },
+  {
+    label: "Egg Specials",
+    items: [
+      { name: "Egg Curry", price: 160 },
+      { name: "Egg Masala", price: 180 },
+      { name: "Andhra Egg Curry", price: 190 },
+      { name: "Egg Bhurji", price: 170 },
+      { name: "Masala Omelette", price: 150 },
+      { name: "Boiled Egg (3 Pcs)", price: 60 },
+      { name: "Plain Omelette", price: 120 }
+    ]
+  },
+  {
+    label: "Fish & Prawns Curry",
+    items: [
+      { name: "Fish Curry", price: 240 },
+      { name: "Fish Masala", price: 240 },
+      { name: "Andhra Fish Curry", price: 270 },
+      { name: "Fish Fry", price: 240 },
+      { name: "Kadai Fish", price: 240 },
+      { name: "Prawns Curry", price: 240 },
+      { name: "Prawns Masala", price: 250 },
+      { name: "Andhra Prawns Curry", price: 250 },
+      { name: "Prawns Butter Masala", price: 270 }
+    ]
+  }
+];
+
+// src/lib/mcp/tools/list-categories.ts
 var list_categories_default = defineTool({
   name: "list_categories",
   title: "List menu categories",
@@ -26,7 +269,6 @@ var list_categories_default = defineTool({
 // src/lib/mcp/tools/list-menu.ts
 import { defineTool as defineTool2 } from "npm:@lovable.dev/mcp-js@0.24.0";
 import { z } from "npm:zod@^3.25.76";
-import { menuCategories as menuCategories2 } from "npm:@/data/menuData";
 var list_menu_default = defineTool2({
   name: "list_menu",
   title: "List menu items",
@@ -37,7 +279,7 @@ var list_menu_default = defineTool2({
   annotations: { readOnlyHint: true, idempotentHint: true, openWorldHint: false },
   handler: ({ category }) => {
     const filter = category?.toLowerCase();
-    const cats = filter ? menuCategories2.filter((c) => c.label.toLowerCase() === filter) : menuCategories2;
+    const cats = filter ? menuCategories.filter((c) => c.label.toLowerCase() === filter) : menuCategories;
     if (filter && cats.length === 0) {
       return {
         content: [{ type: "text", text: `No category matching "${category}".` }],
@@ -61,7 +303,6 @@ var list_menu_default = defineTool2({
 // src/lib/mcp/tools/search-menu.ts
 import { defineTool as defineTool3 } from "npm:@lovable.dev/mcp-js@0.24.0";
 import { z as z2 } from "npm:zod@^3.25.76";
-import { menuCategories as menuCategories3 } from "npm:@/data/menuData";
 var search_menu_default = defineTool3({
   name: "search_menu",
   title: "Search menu",
@@ -74,7 +315,7 @@ var search_menu_default = defineTool3({
   handler: ({ query, limit }) => {
     const q = query.toLowerCase();
     const matches = [];
-    for (const c of menuCategories3) {
+    for (const c of menuCategories) {
       for (const it of c.items) {
         if (it.name.toLowerCase().includes(q)) {
           matches.push({ name: it.name, price: it.price, category: c.label });
@@ -123,7 +364,6 @@ var restaurant_info_default = defineTool4({
 // src/lib/mcp/tools/order-link.ts
 import { defineTool as defineTool5 } from "npm:@lovable.dev/mcp-js@0.24.0";
 import { z as z3 } from "npm:zod@^3.25.76";
-import { menuCategories as menuCategories4 } from "npm:@/data/menuData";
 var order_link_default = defineTool5({
   name: "build_whatsapp_order_link",
   title: "Build WhatsApp order link",
@@ -142,7 +382,7 @@ var order_link_default = defineTool5({
   annotations: { readOnlyHint: true, idempotentHint: true, openWorldHint: false },
   handler: ({ items, customer_name, order_type, notes }) => {
     const lookup = /* @__PURE__ */ new Map();
-    for (const c of menuCategories4) for (const it of c.items) lookup.set(it.name.toLowerCase(), it.price);
+    for (const c of menuCategories) for (const it of c.items) lookup.set(it.name.toLowerCase(), it.price);
     const resolved = [];
     const missing = [];
     for (const i of items) {

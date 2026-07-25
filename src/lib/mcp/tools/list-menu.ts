@@ -1,6 +1,6 @@
 import { defineTool } from "@lovable.dev/mcp-js";
 import { z } from "zod";
-import { menuCategories } from "@/data/menuData";
+import { menuCategories } from "../../../data/menuData";
 
 export default defineTool({
   name: "list_menu",
