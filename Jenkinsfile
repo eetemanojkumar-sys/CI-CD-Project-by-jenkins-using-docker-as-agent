@@ -108,7 +108,8 @@ pipeline {
                 sshagent(credentials: ['aws-ec2-ssh']) {
                     sh '''
                         ssh -o StrictHostKeyChecking=no ${AWS_EC2_USER}@${AWS_EC2_HOST} "
-                            docker pull ${DOCKERHUB_REPOSITORY}:${IMAGE_TAG} &&
+                            set -e
+                            docker pull ${DOCKERHUB_REPOSITORY}:${IMAGE_TAG}
                             docker stop ${APP_NAME} || true
                             docker rm ${APP_NAME} || true
                             docker run -d \
