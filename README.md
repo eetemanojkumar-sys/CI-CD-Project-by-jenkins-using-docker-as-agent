@@ -119,24 +119,34 @@ This prevents a vulnerable image from reaching the registry or deployment stage.
 
 Only an image that passes both SonarQube and Trivy gates is tagged and pushed to Docker Hub.
 
-### 8. Deploy
+### 8. Deploy to AWS EC2
 
-The approved image is deployed to AWS EC2.
+The approved image is pulled from Docker Hub and deployed to the single AWS EC2 target over SSH.
 
-```bash
-docker stop yum-list-weaver || true
-docker rm yum-list-weaver || true
-docker run -d --name yum-list-weaver --restart unless-stopped -p 8081:80 IMAGE
+The Jenkinsfile uses the Jenkins SSH credential ID:
+
+```text
+aws-ec2-ssh
 ```
+
+Configure the AWS EC2 host and user in the Jenkinsfile:
+
+```groovy
+AWS_EC2_HOST = 'YOUR_AWS_EC2_PUBLIC_IP'
+AWS_EC2_USER = 'ubuntu'
+```
+
+The EC2 instance must have Docker installed and the Jenkins SSH public key in the EC2 user's `~/.ssh/authorized_keys`.
 
 ### 9. Verify
 
-Jenkins verifies the container and performs an HTTP health check:
+Jenkins verifies the AWS EC2 deployment over HTTP:
 
 ```bash
-docker ps
-curl --fail http://localhost:8081
+curl --fail http://<AWS_EC2_PUBLIC_IP>:8081
 ```
+
+Ensure TCP port `8081` is allowed in the AWS EC2 Security Group.
 
 ## Jenkins Configuration
 
@@ -180,6 +190,18 @@ DOCKERHUB_REPOSITORY = 'YOUR_DOCKERHUB_USERNAME/yum-list-weaver'
 ```
 
 Do not hard-code registry passwords or tokens in the repository.
+
+### AWS EC2 SSH
+
+Install the Jenkins **SSH Agent** plugin and create an SSH Username with private key credential:
+
+```text
+ID: aws-ec2-ssh
+Username: ubuntu
+Private Key: <your EC2 SSH private key>
+```
+
+The corresponding public key must be authorized on the EC2 instance. The Jenkins agent must be able to reach the EC2 instance on TCP port `22`.
 
 ## Failure Gates
 
