@@ -6,8 +6,8 @@ pipeline {
         IMAGE_NAME = 'yum-list-weaver'
         IMAGE_TAG = "${BUILD_NUMBER}"
 
-        // Use Node 22 installed for the Jenkins user.
-        NVM_DIR = '/var/lib/jenkins/.nvm'
+        // Use the Node 22 installation available to the Jenkins user.
+        NODE_HOME = '/var/lib/jenkins/.nvm/versions/node/v22.23.3'
 
         // Configure these in Jenkins Credentials / Jenkinsfile.
         DOCKERHUB_CREDENTIALS = credentials('dockerhub-credentials')
@@ -23,22 +23,18 @@ pipeline {
     }
 
     stages {
-        stage('Checkout') {
-            steps {
-                checkout scm
-            }
-        }
-
         stage('Install & Test') {
             steps {
                 sh '''
                     set -e
-                    export NVM_DIR="/var/lib/jenkins/.nvm"
-                    [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"
-                    nvm use 22
+                    export PATH="$NODE_HOME/bin:$PATH"
 
+                    echo "================================"
                     echo "Node: $(node -v)"
                     echo "npm:  $(npm -v)"
+                    echo "Node path: $(which node)"
+                    echo "npm path:  $(which npm)"
+                    echo "================================"
 
                     npm install --legacy-peer-deps
                     npm run lint
